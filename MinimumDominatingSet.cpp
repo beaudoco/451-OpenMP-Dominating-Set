@@ -122,12 +122,14 @@ int main() {
   // in the execution of the program.
   // This is the best candidate for parallelizing
   // using an openmp directive
+  #pragma omp parallel for
   for(long e = 1; e < twoToN;e++) {
     
     if (isDominatingSet(e,n,(const int **) adjacencyMatrix)) {
 	    // Notice that this block is a critical section
 	    // It should be protected with an open mp directive
 	  {
+      #pragma omp critical
 	    if (bitsIn1(e,n) <  minNumberBits) { 
 	      minNumberBits = bitsIn1(e,n);
 	      result = e;
